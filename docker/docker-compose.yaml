@@ -1,0 +1,15 @@
+name: sisyphus-docs
+
+services:
+  docusaurus:
+    restart: always
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - 4000:80
+    networks:
+      - sisyphus-docs
+
+networks:
+  sisyphus-docs:
