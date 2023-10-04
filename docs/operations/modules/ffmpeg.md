@@ -46,11 +46,13 @@ This is a list of the source input files.  Sources are indexed from zero when re
 ### Source Maps
 
 ```json title="Source Map Example"
-[{
-  "source": 0,
-  "specifier": "a",
-  "stream": 2
-}]
+[
+  {
+    "source": 0,
+    "specifier": "a",
+    "stream": 2
+  }
+]
 ```
 
 ```json title="Generated Command Options"
@@ -66,23 +68,25 @@ The `stream` is which stream/track you want to use.  If there is no specifier, t
 ### Output Maps
 
 ```json title="Output Map Example"
-[{
-  "specifier": "v",
-  "stream": 0,
-  "options": {
-    "codec": "libx265",
-    "crf": 19,
-    "pix_fmt": "yuv420p10le",
-    "preset": "slow",
-    "x265-params": {
-      "limit-sao": 1,
-      "bframes": 8,
-      "psy-rd": 1,
-      "psy-rdoq": 2,
-      "aq-mode": 3
+[
+  {
+    "specifier": "v",
+    "stream": 0,
+    "options": {
+      "codec": "libx265",
+      "crf": 19,
+      "pix_fmt": "yuv420p10le",
+      "preset": "slow",
+      "x265-params": {
+        "limit-sao": 1,
+        "bframes": 8,
+        "psy-rd": 1,
+        "psy-rdoq": 2,
+        "aq-mode": 3
+      }
     }
   }
-}]
+]
 ```
 
 ```console title="Generated Command Options"
