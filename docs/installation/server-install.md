@@ -27,7 +27,7 @@ If not using the Docker Compose file:
 
 ### Docker Compose
 
-Also, two environment variables need to be passed to `sisyphus-server`:
+Two environment variables need to be passed to `sisyphus-server` so that the API server can store information about jobs and the queue:
 
 | Variable | Default | Description |
 |:--|:--|:--|

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+description: Encode video and audio files.
 ---
 
 # `ffmpeg` Module
@@ -7,6 +7,12 @@ sidebar_position: 1
 :::tip
 
 To really use this module, it's recommended to be familiar with Ffmpeg command-line options and the concept of source maps.  For more information, refer to [Ffmpeg's documentation](https://ffmpeg.org/ffmpeg.html) on the `-map` option along with specific encoder and track options.
+
+:::
+
+:::caution
+
+Ffmpeg specifiers are single characters like `s` and `a`. These are different than those used by Matroska which uses full words.
 
 :::
 
@@ -39,12 +45,16 @@ This is a list of the source input files.  Sources are indexed from zero when re
 
 ### Source Maps
 
-```json
+```json title="Source Map Example"
 [{
   "source": 0,
   "specifier": "a",
   "stream": 2
 }]
+```
+
+```json title="Generated Command Options"
+-map 0:a:2
 ```
 
 This mapping is comprised of three things: the `source` which is the _nth_ source listed in the sources (starting with zero).
@@ -55,7 +65,7 @@ The `stream` is which stream/track you want to use.  If there is no specifier, t
 
 ### Output Maps
 
-```json
+```json title="Output Map Example"
 [{
   "specifier": "v",
   "stream": 0,
@@ -75,6 +85,11 @@ The `stream` is which stream/track you want to use.  If there is no specifier, t
 }]
 ```
 
+```console title="Generated Command Options"
+-codec:v:0 libx265 -crf:v:0 19 -pix_fmt:v:0 yuv420p10le -preset:v:0 slow \
+-x265-params:v:0 limit-sao=1:bframes=8:psy-rd=1:psy-rdoq=2:aq-mode=3
+```
+
 Each output map can specify a `specifier` for a given type of track (just like source maps), and a stream number via the `stream` attribute.  Instead of referencing the source files, this references the resulting map from the source map.  The example would reference the first video track _after_ the source maps.  This basically means the first video track pulled from the sources via the source maps.
 
 The options defined for a given track are the CLI options and definitions for a given track and are defined by what encoder is being used and the track type.  For more information about those, reference the [Ffmpeg documentation](https://ffmpeg.org/ffmpeg.html).
@@ -88,6 +103,8 @@ The attribute `output_file` just tells Ffmpeg where to save the resulting file t
 The attribute `overwrite` tells Ffmpeg to overwrite the `output_file` if it already exists.
 
 ## Server-Side Data
+
+### Option Sets
 
 The full example below shows two scenarios.  The video output map shows all of the `ffmpeg` options being defined in the `output_maps` section.  The audio output map shows what is called an `option_set`.  This allows for sets of options to be defined on the API server for use by all connected clients.
 
@@ -125,7 +142,7 @@ From there, the first output map looks for the first video track we specified an
 
 The `output_file` is defined as `/shared/output_file.mkv` which will be overwritten if it already exists (via the `overwrite` attribute).
 
-```json
+```json title="Full Example"
 {
   "sources": [
     "source_file_1.mkv",
@@ -169,7 +186,7 @@ The `output_file` is defined as `/shared/output_file.mkv` which will be overwrit
     {
       "specifier": "a",
       "stream": 0,
-      "option_set": "opus-128k-stereo",
+      "option_set": "opus-128k-stereo"
     },
     {
       "specifier": "s",
@@ -184,3 +201,17 @@ The `output_file` is defined as `/shared/output_file.mkv` which will be overwrit
 }
 ```
 
+```bash title="Generated Command"
+/path/to/ffmpeg.exe -y -progress pipe:1 -i "source_file_1.mkv" -i "source_file_2.ac3" \
+-map 0:v:0 -map 1:a:0 -map 0:s:0 \
+-codec:v:0 libx265 -crf:v:0 19 -pix_fmt:v:0 yuv420p10le -preset:v:0 slow \
+-x265-params:v:0 limit-sao=1:bframes=8:psy-rd=1:psy-rdoq=2:aq-mode=3 \
+-codec:a:0 libopus -b:a:0 128k -ac:a:0 2 -vbr:a:0 on -compression_level:a:0 10 -application:a:0 audio \
+-codec:s:0 copy "/shared/output_file.mkv"
+```
+
+:::note
+
+The `-progress pipe:1` is required for the client to capture progress information.
+
+:::

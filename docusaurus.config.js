@@ -61,11 +61,26 @@ const config = {
           src: 'img/logo.svg',
         },
         items: [
+          // {
+          //   type: 'docSidebar',
+          //   sidebarId: 'tutorialSidebar',
+          //   position: 'left',
+          //   label: 'Installation',
+          // },
           {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
+            href: '/category/installation',
             label: 'Installation',
+            position: 'left',
+          },
+          {
+            href: '/category/operations',
+            label: 'Operations',
+            position: 'left',
+          },
+          {
+            href: '/category/modules',
+            label: 'Modules',
+            position: 'left',
           },
           {
             href: 'https://github.com/JamesTheBard/sisyphus-docs',
