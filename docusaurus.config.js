@@ -58,7 +58,7 @@ const config = {
         title: 'Sisyphus',
         logo: {
           alt: 'Sisyphus Encoding Server',
-          src: 'img/logo.svg',
+          src: 'img/red-circle.png',
         },
         items: [
           // {
