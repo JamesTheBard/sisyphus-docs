@@ -5,9 +5,9 @@ sidebar_position: 1
 
 # Introduction
 
-![Screenshot of the API server Swagger page](img/firefox_U7z7MrDd0b.png)
-
 The Sisyphus encoding system is a distributed encoding solution written in Python that uses a central server to queue up encoding jobs that are then distributed to one or more encoding workers/clients.
+
+![Screenshot of the API server Swagger page](img/firefox_U7z7MrDd0b.png)
 
 ## Components
 
