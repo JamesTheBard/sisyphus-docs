@@ -61,3 +61,178 @@ After validation, the task starts by calling the `run()` method.
 
 Tasks can perform cleanup actions after the task has been run.  This is separate from the `cleanup` module.
 
+## Job Example
+
+### Server Side Data
+
+```json title="Ffmpeg Option Set: x265-dark-and-stormy"
+{
+  "name": "x265-dark-and-stormy",
+  "options": {
+    "codec": "libx265",
+    "crf": 19,
+    "pix_fmt": "yuv420p10le",
+    "preset": "slow",
+    "x265-params": {
+      "limit-sao": 1,
+      "bframes": 8,
+      "psy-rd": 1,
+      "psy-rdoq": 2,
+      "aq-mode": 3
+    }
+  }
+}
+```
+
+```json title="Ffmpeg Option Set: opus-128k-stereo"
+{
+  "name": "opus-128k-stereo",
+  "options": {
+    "codec": "libopus",
+    "b": "128k",
+    "ac": 2,
+    "vbr": "on",
+    "compression_level": 10,
+    "application": "audio"
+  }
+}
+```
+
+### Submitted Job
+
+```json title="Submitted Job Example"
+{
+  "job_title": "{{ job_title }}",
+  "tasks": [
+    {
+      "module": "ffmpeg",
+      "data": {
+        "sources": [
+          "{{ source_file }}"
+        ],
+        "source_maps": [
+          {
+            "source": 0,
+            "specifier": "v",
+            "stream": 0
+          },
+          {
+            "source": 0,
+            "specifier": "a",
+            "stream": 2
+          },
+          {
+            "source": 0,
+            "specifier": "a",
+            "stream": 0
+          },
+          {
+            "source": 0,
+            "specifier": "s",
+            "stream": 0
+          },
+          {
+            "source": 0,
+            "specifier": "s",
+            "stream": 1
+          }
+        ],
+        "output_maps": [
+          {
+            "specifier": "v",
+            "stream": 0,
+            "option_set": "x265-dark-and-stormy"
+          },
+          {
+            "specifier": "a",
+            "stream": 0,
+            "option_set": "opus-128k-stereo"
+          },
+          {
+            "specifier": "a",
+            "stream": 1,
+            "option_set": "opus-128k-stereo"
+          },
+          {
+            "specifier": "s",
+            "stream": 0,
+            "options": {
+              "codec": "copy"
+            }
+          }
+        ],
+        "output_file": "output_file.mkv",
+        "overwrite": true
+      }
+    },
+    {
+      "module": "mkvmerge",
+      "data": {
+        "sources": [
+          {
+            "filename": "output_file.mkv"
+          }
+        ],
+        "tracks": [
+          {
+            "source": 0,
+            "track": 0,
+            "options": {
+              "language": "eng",
+              "default-track": "yes",
+              "track-name": "{{ video_title }}"
+            }
+          },
+          {
+            "source": 0,
+            "track": 1,
+            "options": {
+              "language": "jpn",
+              "default-track": "yes",
+              "track-name": "Stereo (OPUS)"
+            }
+          },
+          {
+            "source": 0,
+            "track": 2,
+            "options": {
+              "language": "eng",
+              "default-track": "no",
+              "track-name": "Stereo (OPUS)"
+            }
+          },
+          {
+            "source": 0,
+            "track": 3,
+            "options": {
+              "language": "eng",
+              "default-track": "yes",
+              "track-name": "Subtitles"
+            }
+          }
+        ],
+        "output_file": "{{ output_file }}",
+        "options": {
+          "no-global-tags": null,
+          "no-track-tags": null,
+          "title": "{{ video_title }}"
+        }
+      }
+    },
+    {
+      "module": "cleanup",
+      "data": {
+        "move": [
+          {
+            "source": "{{ output_file }}",
+            "destination": "/mnt/public_share/Done/{{ output_file }}"
+          }
+        ],
+        "delete": [
+          "output_file.mkv"
+        ]
+      }
+    }
+  ]
+}
+```
