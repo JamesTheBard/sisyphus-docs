@@ -82,7 +82,7 @@ const config = {
             position: 'left',
           },
           {
-            href: 'https://github.com/JamesTheBard/sisyphus-docs',
+            href: 'https://github.com/JamesTheBard',
             label: 'GitHub',
             position: 'right',
           },
@@ -118,7 +118,7 @@ const config = {
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/JamesTheBard/sisyphus-docs',
+                href: 'https://github.com/JamesTheBard',
               },
             ],
           },
