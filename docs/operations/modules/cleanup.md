@@ -8,9 +8,9 @@ The `cleanup` module is very simple: it allows you to move and delete files.  Si
 
 ```json title="Task Skeleton"
 {
-    "delete": [],
-    "copy": [{}],
-    "move": [{}]
+  "delete": [],
+  "copy": [{}],
+  "move": [{}]
 }
 ```
 
@@ -20,8 +20,8 @@ The `cleanup` module is very simple: it allows you to move and delete files.  Si
 
 ```json
 [
-    "temp_file_01.mkv",
-    "temp_file_02.mkv"
+  "temp_file_01.mkv",
+  "temp_file_02.mkv"
 ]
 ```
 
@@ -30,10 +30,12 @@ This is a list of files to delete.  The module will attempt to delete them.  If 
 ### Copy
 
 ```json
-[{
-  "source": "finished_file.mkv",
-  "destination": "/shared/finished_file.mkv"
-}]
+[
+  {
+    "source": "finished_file.mkv",
+    "destination": "/shared/finished_file.mkv"
+  }
+]
 ```
 
 Copy the `source` file to `destination`.  The module will attempt to copy the file to the destination, but will throw an error if it cannot copy the file.
@@ -41,10 +43,12 @@ Copy the `source` file to `destination`.  The module will attempt to copy the fi
 ### Move
 
 ```json
-[{
-  "source": "finished_file.mkv",
-  "destination": "/shared/finished_file.mkv"
-}]
+[
+  {
+    "source": "finished_file.mkv",
+    "destination": "/shared/finished_file.mkv"
+  }
+]
 ```
 
 Basically the same thing as `copy`, but the source file is moved instead of being copied to the destination.

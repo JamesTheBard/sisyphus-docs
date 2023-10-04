@@ -12,17 +12,17 @@ A job is simply the job name, and a list of task objects.  Each task loads a mod
 
 ```json
 {
-    "job_name": "Awesome Encoding Job",
-    "tasks": [
-        {
-            "module": "ffmpeg",
-            "data": {}
-        },
-        {
-            "module": "mkvmerge",
-            "data": {}
-        }
-    ]
+  "job_name": "Awesome Encoding Job",
+  "tasks": [
+    {
+      "module": "ffmpeg",
+      "data": {}
+    },
+    {
+      "module": "mkvmerge",
+      "data": {}
+    }
+  ]
 }
 ```
 
@@ -30,8 +30,8 @@ Every job contains a set of one or more tasks.  Each task gets processed in the 
 
 ```json title="Task Skeleton"
 {
-    "module": "ffmpeg",
-    "data": {}
+  "module": "ffmpeg",
+  "data": {}
 }
 ```
 

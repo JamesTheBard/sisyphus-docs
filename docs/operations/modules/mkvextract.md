@@ -8,13 +8,13 @@ The `mkvextract` module can extract one or more tracks, attachments, chapters, t
 
 ```json title="Task Skeleton"
 {
-    "source": "",
-    "tracks": [{}],
-    "attachments": [{}],
-    "chapters": "",
-    "tags": "",
-    "timestamps": [{}],
-    "cues": [{}],
+  "source": "",
+  "tracks": [{}],
+  "attachments": [{}],
+  "chapters": "",
+  "tags": "",
+  "timestamps": [{}],
+  "cues": [{}]
 }
 ```
 
@@ -33,12 +33,14 @@ Matroska specifiers (seen here as `track_type`) are full words like `video`, `au
 :::
 
 ```json
-[{
+[
+  {
     "id": 0,
     "track_type": "subtitles",
     "language": "jpn",
-    "filename": "subtitles.ass",
-}]
+    "filename": "subtitles.ass"
+  }
+]
 ```
 
 The `id` attribute is a zero-indexed number and specifies which track from the source to dump to `filename`.  If the `track_type` attribute is provided, then `id` specifies the _nth_ track of type `track_type`.  If `language` is also provided, then `id` will specify the _nth_ track of type `track_type` and language `language`.
@@ -48,10 +50,12 @@ In the example above, `mkvextract` will dump the first Japanese subtitle track a
 ### Attachments
 
 ```json
-[{
+[
+  {
     "id": 0,
     "filename": "cool_font.ttf"
-}]
+  }
+]
 ```
 
 The `attchments` attribute will dump the _nth_ attachment of the source file and save it as `filename`.
@@ -73,10 +77,12 @@ Dump all the tag information of the source file and save it to `tags`.
 ### Timestamps
 
 ```json
-[{
+[
+  {
     "id": 0,
     "filename": "timestamp.txt"
-}]
+  }
+]
 ```
 
 Extract the _nth_ timestamp information (`id`) from the source file and save it as `filename`.
@@ -84,10 +90,12 @@ Extract the _nth_ timestamp information (`id`) from the source file and save it 
 ### Cues
 
 ```json
-[{
+[
+  {
     "id": 0,
     "filename": "cue_information.txt"
-}]
+  }
+]
 ```
 
 Extract the _nth_ set of cue information (`id`) from the source file and save it as `filename`.
@@ -100,34 +108,34 @@ This module does not use server-side data.
 
 ```json
 {
-    "source": "source_file.mkv",
-    "tracks": [
-        {
-            "id": 0,
-            "track_type": "subtitles",
-            "language": "jpn",
-            "filename": "subtitles.ass",
-        }
-    ],
-    "attachments": [
-        {
-            "id": 0,
-            "filename": "cool_font.ttf"
-        }
-    ],
-    "chapters": "chapters.xml",
-    "tags": "tags.xml",
-    "timestamps": [
-        {
-            "id": 0,
-            "filename": "timestamps_v2.txt"
-        }
-    ],
-    "cues": [
-        {
-            "id": 0,
-            "filename": "cue_information.txt"
-        }
-    ]
+  "source": "source_file.mkv",
+  "tracks": [
+    {
+      "id": 0,
+      "track_type": "subtitles",
+      "language": "jpn",
+      "filename": "subtitles.ass"
+    }
+  ],
+  "attachments": [
+    {
+      "id": 0,
+      "filename": "cool_font.ttf"
+    }
+  ],
+  "chapters": "chapters.xml",
+  "tags": "tags.xml",
+  "timestamps": [
+    {
+      "id": 0,
+      "filename": "timestamps_v2.txt"
+    }
+  ],
+  "cues": [
+    {
+      "id": 0,
+      "filename": "cue_information.txt"
+    }
+  ]
 }
 ```

@@ -25,7 +25,7 @@ If you want to halt all workers from processing jobs on the queue, you can disab
 
 ```json title="JSON Body"
 {
-    "disabled": true
+  "disabled": true
 }
 ```
 

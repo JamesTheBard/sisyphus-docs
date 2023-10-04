@@ -30,7 +30,7 @@ In the body of the request, you will need to set the `disabled` attribute to `tr
 
 ```json title="JSON Body"
 {
-    "disabled": true
+  "disabled": true
 }
 ```
 

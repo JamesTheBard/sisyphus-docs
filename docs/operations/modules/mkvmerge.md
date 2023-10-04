@@ -14,11 +14,11 @@ The `mkvmerge` module allows for muxing multiple files together into a single Ma
 
 ```json title="Task Skeleton"
 {
-    "sources": [{}],
-    "tracks": [{}],
-    "options": {},
-    "attachments": [{}],
-    "output_file": ""
+  "sources": [{}],
+  "tracks": [{}],
+  "options": {},
+  "attachments": [{}],
+  "output_file": ""
 }
 ```
 
@@ -48,15 +48,17 @@ For options defined with a value of `null`, this means to include the option but
 ### Tracks
 
 ```json
-[{
+[
+  {
     "source": 0,
     "track": 0,
     "options": {
-        "language": "und",
-        "default-track": "yes",
-        "track-name": "Awesome Newly Muxed Video"
+      "language": "und",
+      "default-track": "yes",
+      "track-name": "Awesome Newly Muxed Video"
     }
-}]
+  }
+]
 ```
 
 Tracks are zero-indexed, and there is currently no specifier support.  The `source` attribute identifies which source to use (zero-indexed) and the `track` is which track to use from that source (also zero-indexed).
@@ -67,9 +69,9 @@ The `options` specify information pertaining to the track in question.  These se
 
 ```json
 {
-    "no-global-tags": null,
-    "no-track-tags": null,
-    "title": "Awesome Newly Muxed Video"
+  "no-global-tags": null,
+  "no-track-tags": null,
+  "title": "Awesome Newly Muxed Video"
 }
 ```
 
@@ -80,11 +82,13 @@ This is not to be confused with the `options` attribute as part of the `sources`
 ### Attachments
 
 ```json
-[{
+[
+  {
     "name": "Cool Open Source Font",
     "filename": "open_source_font.otf",
     "mime_type": "application/vnd.ms-opentype"
-}]
+  }
+]
 ```
 
 The `attachments` attribute allows for the attachment of files such as fonts to the resulting Matroska file.  The `filename` is the file to be attached.  The `name` attribute is optional, and will default to the `filename` if not defined.

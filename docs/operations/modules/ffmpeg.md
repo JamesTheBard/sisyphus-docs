@@ -22,11 +22,11 @@ There are limitations to this file.  All tracks must be specified via the source
 
 ```json title="Task Skeleton"
 {
-    "sources": [],
-    "source_maps": [{}],
-    "output_maps": [{}],
-    "output_file": "",
-    "overwrite": true
+  "sources": [],
+  "source_maps": [{}],
+  "output_maps": [{}],
+  "output_file": "",
+  "overwrite": true
 }
 ```
 
