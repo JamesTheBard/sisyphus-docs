@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Sisyphus',
   tagline: 'Dinosaurs are cool',
-  // favicon: 'img/favicon.ico',
+  favicon: 'img/android-chrome-512x512.png',
 
   // Set the production url of your site here
   url: 'https://sisyphus.jamesthebard.net',
