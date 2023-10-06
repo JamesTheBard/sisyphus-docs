@@ -214,6 +214,40 @@ It's also recommended for each of those methods that a informational logging mes
 
 The logging package used by Sisyphus is `loguru` and is part of the dependencies listed in the `pyproject.toml` file.
 
+## Server-Side Data
+
+The API server can store and retrieve data for a module and make that data available for all clients connected to the server.
+
+The `ffmpeg` module will pull sets of options from the API server which means that every client can use the same encoding settings without having to define them every time in the task data.
+
+To grab information from the API server:
+
+```python
+import requests
+from app.config import Config
+
+# To get the data
+task_module = "ffmpeg"
+data_name = "x265-veryfast"
+
+# The GET request equivalent URL:
+# http://address.to.api.server:5000/data/ffmpeg/x265-veryfast
+requests.get(f"{Config.API_URL}/data/{task_module}/{data_name}")
+
+# To push data to the server:
+data_to_send = {
+    "options": {
+        "codec": 'libx265',
+        "crf": 19,
+        "preset": 'veryfast'
+    }
+}
+requests.post(
+    f"{Config.API_URL}/data/{task_module}/{data_name},
+    data=data_to_send
+)
+```
+
 ## Enabling a Module
 
 In the `pyproject.toml` file, there is a section called `tool.client.modules.enabled`.  This allows for modules that aren't being used to be disabled, and allows for adding available modules to the client.
