@@ -131,7 +131,8 @@ const config = {
         additionalLanguages: [
           'powershell',
           'json',
-          'shell-session'
+          'shell-session',
+          'toml'
         ]
       },
       colorMode: {
