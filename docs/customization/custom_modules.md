@@ -9,7 +9,7 @@ Writing custom modules for the Sisyphus client is fairly easy.  Each module inhe
 
 :::caution
 
-This documentation applies to the `sisyphus-client` version `1.4.0` or greater.  While much this applies to previous versions, the way that modules from tasks are handled significantly.
+This documentation applies to the `sisyphus-client` version `1.4.0` or greater.  While much of this applies to previous versions, the way that modules from tasks are handled changed significantly.  All modules are initialized and validated before running any of the `run` methods whereas they were run only when the client got to the task in previous versions.
 
 :::
 
