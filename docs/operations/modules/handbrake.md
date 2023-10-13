@@ -4,7 +4,7 @@ description: Encode video and audio files, but differently than Ffmpeg.
 
 # `handbrake` Module
 
-**Available in Version 1.5.0**
+**Available in `sisyphus-client` Version 1.5.0**
 
 :::tip
 
