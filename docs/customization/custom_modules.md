@@ -9,7 +9,7 @@ Writing custom modules for the Sisyphus client is fairly easy.  Each module inhe
 
 :::caution
 
-This documentation applies to the `sisyphus-client` version `1.4.0` or greater.  While much this applies to previous versions, the way that modules from tasks are handled significantly.
+This documentation applies to the `sisyphus-client` version `1.4.0` or greater.  While much of this applies to previous versions, the way that modules from tasks are handled changed significantly.  All modules are initialized and validated before running any of the `run` methods whereas they were run only when the client got to the task in previous versions.
 
 :::
 
@@ -28,7 +28,7 @@ class BaseModule:
     """
     heartbeat: Heartbeat
     task: Box
-    start_time: datetime
+    start_time: Optional[datetime]
 
     def __init__(self, task: Union[dict, Box]):
         """Initializes the instance based on task information.
@@ -41,7 +41,7 @@ class BaseModule:
         """
         self.heartbeat = heartbeat
         self.task = Box(task)
-        self.start_time = datetime.now(tz=Config.API_TIMEZONE)
+        self.start_time = None
 
     def validate(self) -> None:
         """Validates the task data before execution.
@@ -57,6 +57,7 @@ class BaseModule:
         Raises:
             RunError: An error occured when running the module.
         """
+        self.set_start_time()
         logger.info("No run actions, skipping")
 
     def cleanup(self) -> None:
@@ -74,6 +75,11 @@ class BaseModule:
             datetime: The time elapsed since module start
         """
         return datetime.now(tz=Config.API_TIMEZONE) - self.start_time
+
+    def set_start_time(self) -> None:
+        """Set the start time of the module.
+        """
+        self.start_time = datetime.now(tz=Config.API_TIMEZONE)
 ```
 
 ## Heartbeat
@@ -184,6 +190,21 @@ raise ValidationError(message="Your data is bad and you should feel bad.")
 ### Run
 
 After all of the modules defined in all of the tasks are initialized and their data validated, the client's processing loop starts running the `run` method on each task's module in order (serially).  All of the initialization/validation happens first for all modules because the `run` method tends to be the longest running method for any module.
+
+Since client version `1.4.0`, the modules all get initialized at the same time.  This requires adding a method call to set the start time (`self.set_start_time()`) when running the module as it used to live in the `__init__` method.
+
+:::caution
+
+Failure to add the `self.set_start_time()` call in the `run()` method may lead to undesireable effects like the client eating itself.
+
+:::
+
+```python
+class CoolCustomModule(BaseClass):
+    def run(self) -> None:
+        self.set_start_time()
+        # insert run code here
+```
 
 As with previous methods, the `run` method must catch and handle all exceptions.  The only exception that should be thrown is a `RunError` exception which the client will handle gracefully.
 
