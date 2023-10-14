@@ -206,7 +206,7 @@ The `output_file` is defined as `/shared/output_file.mkv` which will be overwrit
 ```
 
 ```bash title="Generated Command"
-/path/to/ffmpeg.exe -y -progress pipe:1 -i "source_file_1.mkv" -i "source_file_2.ac3" \
+/path/to/ffmpeg -y -progress pipe:1 -i "source_file_1.mkv" -i "source_file_2.ac3" \
 -map 0:v:0 -map 1:a:0 -map 0:s:0 \
 -codec:v:0 libx265 -crf:v:0 19 -pix_fmt:v:0 yuv420p10le -preset:v:0 slow \
 -x265-params:v:0 limit-sao=1:bframes=8:psy-rd=1:psy-rdoq=2:aq-mode=3 \

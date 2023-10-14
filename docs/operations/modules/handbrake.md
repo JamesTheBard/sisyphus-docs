@@ -110,3 +110,46 @@ The `output_file` tells HandBrake where to save the output to.  Like the `source
 ```
 
 All of these sections line-up with the HandBrake CLI documentation sections (available by running the command with the `-h` option). You can also view the documentation from [HandBrake's website](https://handbrake.fr/docs/en/latest/cli/command-line-reference.html).
+
+## Server-Side Data
+
+This module does not use server-side data.
+
+## Full Example
+
+```json title="Full Example"
+{
+  "source": "source_file.mkv",
+  "output_file": "output_file.mkv",
+  "video_options": {
+    "encoder": "x265_10bit",
+    "encoder_preset": "slow",
+    "encopts": {
+      "limit-sao": 1,
+      "bframes": 8,
+      "psy-rd": 1,
+      "psy-rdoq": 2,
+      "aq-mode": 3
+    }
+  },
+  "audio_options": {
+    "audio": [ 3, 1 ],
+    "aencoder": [ "opus", "opus" ],
+    "aname": [ "Stereo 2.0 (OPUS)", "Surround 5.1 (OPUS)" ],
+    "ab": [ 128, 192 ],
+    "mixdown": [ "stereo", "5_2_lfe" ]
+  },
+  "subtitles_options": {
+    "subtitle": [ 2, 1 ],
+    "subname": [ "Full Subtitles", "Signs and Songs" ],
+    "subtitle_default": 1
+  }
+}
+```
+
+```bash title="Generated Command"
+'/path/to/HandBrakeCLI' --input source_file.mkv --output output_file.mkv \
+--encoder x265_10bit --encoder-preset slow --encopts limit-sao=1:bframes=8:psy-rd=1:psy-rdoq=2:aq-mode=3 \
+--audio 3,1 --aencoder opus,opus --aname 'Stereo 2.0 (OPUS),Surround 5.1 (OPUS)' --ab 128,192 --mixdown stereo,5_2_lfe \
+--subtitle 2,1 --subname 'Full Subtitles,Signs and Songs' --subtitle-default 1
+```
