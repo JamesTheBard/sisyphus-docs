@@ -92,17 +92,41 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'Sisyphus Repositories',
             items: [
               {
-                label: 'Sisyphus',
-                to: '/',
+                label: 'Client',
+                href: 'https://github.com/JamesTheBard/sisyphus-client',
+              },
+              {
+                label: 'Server',
+                href: 'https://github.com/JamesTheBard/sisyphus-server',
+              },
+              {
+                label: 'Frontend',
+                href: 'https://github.com/JamesTheBard/sisyphus-frontend',
+              },
+              {
+                label: 'Handbrake',
+                href: 'https://github.com/JamesTheBard/sisyphus-handbrake',
+              },
+              {
+                label: 'Ffmpeg',
+                href: 'https://github.com/JamesTheBard/sisyphus-ffmpeg',
+              },
+              {
+                label: 'Matroska',
+                href: 'https://github.com/JamesTheBard/sisyphus-matroska',
               },
             ],
           },
           {
             title: 'Community',
             items: [
+              {
+                label: 'Mastodon',
+                href: 'https://social.linux.pizza/@jamesthebard'
+              },
               {
                 label: 'Twitter',
                 href: 'https://twitter.com/JamesTheBard',
@@ -114,7 +138,7 @@ const config = {
             items: [
               {
                 label: 'Blog',
-                to: 'https://blog.jamesthebard.net',
+                href: 'https://blog.jamesthebard.net',
               },
               {
                 label: 'GitHub',
