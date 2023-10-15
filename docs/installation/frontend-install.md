@@ -48,7 +48,7 @@ You can also define `NEXT_PUBLIC_SISYPHUS_DB` to the Mongo Express server which 
 
 :::caution
 
-The `sisyphus-frontend` version **1.2.0** _requires_ `sisyphus-server` version **1.3.2** or greater!
+The `sisyphus-frontend` versions **1.2.0** and above _require_ `sisyphus-server` version **1.3.2** or greater!
 
 :::
 
