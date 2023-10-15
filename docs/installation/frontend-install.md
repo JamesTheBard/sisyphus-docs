@@ -46,6 +46,12 @@ You can also define `NEXT_PUBLIC_SISYPHUS_DB` to the Mongo Express server which 
 
 ## Installation
 
+:::caution
+
+The `sisyphus-frontend` version **1.2.0** _requires_ `sisyphus-server` version **1.3.2** or greater!
+
+:::
+
 ### Docker Compose
 
 The Docker Compose file will build the `sisyphus-frontend` container and ensure that the website is built with the right information (i.e. the API url).  Failure to define that at build time will result in issues.
