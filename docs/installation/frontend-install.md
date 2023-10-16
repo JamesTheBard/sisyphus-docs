@@ -85,3 +85,7 @@ The Docker Compose file will build the `sisyphus-frontend` container and ensure 
     ```
 
 4. The container can take a minute or two to build.  However, after the service is up, navigate to `http://localhost:3000` and verify that the expected information is there.
+
+## Known Issues
+
+Currently, the `sisyphus-frontend` can control queue and worker status, but changes to either via the API directly will make it very angry and lose state sync between the UI and the API.  For right now, it's recommended to use either the frontend or the API until this gets sorted out.
