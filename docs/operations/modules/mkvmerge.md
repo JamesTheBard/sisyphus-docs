@@ -18,6 +18,7 @@ The `mkvmerge` module allows for muxing multiple files together into a single Ma
   "tracks": [{}],
   "options": {},
   "attachments": [{}],
+  "attachment_directories": [],
   "output_file": ""
 }
 ```
@@ -93,7 +94,22 @@ This is not to be confused with the `options` attribute as part of the `sources`
 
 The `attachments` attribute allows for the attachment of files such as fonts to the resulting Matroska file.  The `filename` is the file to be attached.  The `name` attribute is optional, and will default to the `filename` if not defined.
 
-The `mime_type` option is required _unless you are attaching a TrueType or OpenType font_!  The attachment system has predefined MIME-types for both of those.  However, for any other type of file you must add a MIME-type.
+The `mime_type` option is not required.  However, if the module is unable to determine the appropriate MIME-type for the file then the module will error out.
+
+### Attachment Directories
+
+```json
+[
+  "/mnt/server/fonts_and_files_1",
+  "/mnt/server/fonts_and_files_2"
+]
+```
+
+The `attachment_directories` attribute allows for the attachment of entire directories to the resulting Matroska file.  This is just a list of directories which means you can add more than one directory.
+
+MIME-types are automatically determined on each file in the directory and files whose MIME-types cannot be determined will be skipped.
+
+Files will only be added from the directory, no files will be added from subdirectores inside of the provided directory.
 
 ### Output File
 
@@ -170,6 +186,9 @@ This module does not use server-side data.
       "filename": "test.ttf",
       "mime_type": "application/x-truetype-font"
     }
+  ],
+  "attachment_directories": [
+    "/mnt/server/cool_fonts_and_files"
   ],
   "output_file": "/mnt/server/awesome_newly_muxed_video.mkv"
 }
