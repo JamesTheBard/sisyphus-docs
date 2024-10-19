@@ -24,6 +24,15 @@ If not using the Docker Compose file:
 - Poetry (for Python dependency management)
 - Ffmpeg (installed and in the system path)
 - MkvToolNix (installed and in the system path)
+- Handbrake (the CLI version installed and in the system path)
+
+:::caution
+
+Ensure that the client has enough memory to work.  Failure to provide enough RAM can cause failures that are hard to track down as processes start getting killed to free up RAM.
+
+For a `handbrake` encode at 1080p using the _SvtAV1_ codec required 10-12 GiB of RAM whereas `ffmpeg` encoding H265 required less.  If you start seeing issues with failures, double-check that you're not running out of RAM.
+
+:::
 
 ## Environment Variables
 
@@ -115,7 +124,7 @@ The Docker Compose file will build the `sisyphus-client` container which also ha
 
 :::info
 
-On the client, you will need to install `ffmpeg` and `mkvtoolnix`.  These are required for the client to actually encode and mux videos.  Failure to do this will cause every job to crash and burn.
+On the client, you will need to install `ffmpeg`, `handbrake-cli`, and `mkvtoolnix`.  These are required for the client to actually encode and mux videos.  Failure to do this will cause every job to crash and burn.
 
 To install the dependencies for `sisyphus-client`, you will also need to make sure that Python is install along with `poetry`.  For more information, refer to the [Poetry documentation](https://python-poetry.org/docs/).
 
@@ -169,7 +178,7 @@ To install the dependencies for `sisyphus-client`, you will also need to make su
         {
           "status": "idle",
           "hostname": "encode001",
-          "version": "1.3.4",
+          "version": "1.5.4",
           "online_at": "2023-10-02 16:39:02.714402+00:00",
           "worker_id": "00000000-1111-2222-3333-444444444444",
           "attributes": {
