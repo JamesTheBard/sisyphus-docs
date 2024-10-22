@@ -99,7 +99,7 @@ The Docker Compose file will build the `sisyphus-client` container which also ha
 4. Verify that the container has started successfully by querying the API server for available workers.  The new worker should appear in the `/workers` list.
 
     ```bash
-    curl -X GET http://api.server.url.here:5000/workers
+    curl -s -X GET http://api.server.url.here:5000/workers
     ```
 
     ```json title="Output"
@@ -169,7 +169,7 @@ To install the dependencies for `sisyphus-client`, you will also need to make su
 5. Verify that the container has started successfully by querying the API server for available workers.  The new worker should appear in the `/workers` list.
 
     ```bash
-    curl -X GET http://api.server.url.here:5000/workers
+    curl -s -X GET http://api.server.url.here:5000/workers
     ```
 
     ```json title="Output"

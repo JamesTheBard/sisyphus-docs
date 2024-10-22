@@ -101,11 +101,17 @@ The Docker Compose file will build the `sisyphus-server` container, spin up KeyD
 5. To verify that the server is up, query the `/queue` endpoint.
 
     ```bash
-    curl -X GET https://localhost:5000/queue 
+    curl -s -X GET http://localhost:5000/queue 
     ```
 
     ```json title="Output"
-    {"queue": [], "entries": 0, "attributes": {"disabled": false}}
+    {
+        "queue": [],
+        "entries": 0,
+        "attributes": {
+            "disabled": false
+        }
+    }
     ```
 
 ### Without Docker
@@ -153,9 +159,15 @@ To install the dependencies for `sisyphus-server`, you will also need to make su
 4. To verify that the server is up, query the `/queue` endpoint.
 
     ```bash
-    curl -X GET https://localhost:5000/queue 
+    curl -s -X GET http://localhost:5000/queue 
     ```
 
     ```json title="Output"
-    {"queue": [], "entries": 0, "attributes": {"disabled": false}}
+    {
+        "queue": [],
+        "entries": 0,
+        "attributes": {
+            "disabled": false
+        }
+    }
     ```
