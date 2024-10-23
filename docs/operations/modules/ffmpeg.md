@@ -22,6 +22,7 @@ There are limitations to this file.  All tracks must be specified via the source
 
 ```json title="Task Skeleton"
 {
+  "input_options": {},
   "sources": [],
   "source_maps": [{}],
   "output_maps": [{}],
@@ -32,6 +33,23 @@ There are limitations to this file.  All tracks must be specified via the source
 
 ## Data Breakdown
 
+### Input Options
+
+:::info
+
+Available starting in Sisyphus client version **1.5.6** and above!
+
+:::
+
+These are the options that are added _before_ the sources/input files in the `ffmpeg` command. For example, carving a 10 minute chunk out of the inputs starting at the 10 minute mark could be done like this:
+
+```json
+{
+  "ss": "0:10:00",
+  "to": "0:20:00"
+}
+```
+
 ### Sources
 
 ```json
@@ -40,8 +58,6 @@ There are limitations to this file.  All tracks must be specified via the source
   "input_file_02.ac3"
 ]
 ```
-
-This is a list of the source input files.  Sources are indexed from zero when referencing them in the source maps section.
 
 ### Source Maps
 
@@ -148,6 +164,10 @@ The `output_file` is defined as `/shared/output_file.mkv` which will be overwrit
 
 ```json title="Full Example"
 {
+  "input_options": {
+    "ss": "0:10:00",
+    "to": "0:20:00"
+  },
   "sources": [
     "source_file_1.mkv",
     "source_file_2.ac3"
